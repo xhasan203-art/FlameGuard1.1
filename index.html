@@ -1278,12 +1278,18 @@
   reveals.forEach(r => observer.observe(r));
 
   // Quote form
-  function submitQuote() {
-    const fname = document.getElementById('fname').value.trim();
-    const email = document.getElementById('email').value.trim();
-    const phone = document.getElementById('phone').value.trim();
-    const type  = document.getElementById('kitchen-type').value;
+  const INQUIRY_URL = 'https://script.google.com/macros/s/AKfycbz1gX_7iFGavjsEpvgABlXByGAIye04WxJKX3HX-M71ve_egyKW_x0Qt7l4XXP-VweqkA/exec';
+
+  async function submitQuote() {
+    const fname  = document.getElementById('fname').value.trim();
+    const lname  = document.getElementById('lname').value.trim();
+    const email  = document.getElementById('email').value.trim();
+    const phone  = document.getElementById('phone').value.trim();
+    const type   = document.getElementById('kitchen-type').value;
+    const size   = document.getElementById('kitchen-size').value;
     const stoves = document.getElementById('stoves').value.trim();
+    const address= document.getElementById('address-line').value.trim();
+    const notes  = document.getElementById('notes').value.trim();
 
     if (!fname || !email || !phone || !type || !stoves) {
       alert('Please fill in all required fields (marked with *).');
@@ -1294,7 +1300,30 @@
       return;
     }
 
+    // Collect selected add-ons
+    const addons = ['chk-vent','chk-site','chk-maint','chk-fire']
+      .filter(id => document.getElementById(id)?.checked)
+      .map(id => ({ 'chk-vent':'Auto Ventilation','chk-site':'Free Site Assessment','chk-maint':'Maintenance Contract','chk-fire':'Fire Suppression Upgrade' }[id]))
+      .join(', ') || 'None';
+
+    // Disable button while sending
+    const btn = document.querySelector('.submit-btn');
+    btn.textContent = '⏳ Sending…';
+    btn.disabled = true;
+
+    try {
+      await fetch(INQUIRY_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ fname, lname, email, phone, kitchenType: type, kitchenSize: size, stoves, address, addons, notes })
+      });
+    } catch {}
+
+    // Show success modal
     document.getElementById('modal').classList.add('active');
+    btn.innerHTML = '🚀 Submit Quote Request';
+    btn.disabled = false;
 
     // Reset form
     ['fname','lname','email','phone','notes','stoves','address-line'].forEach(id => { const el = document.getElementById(id); if(el) el.value = ''; });
