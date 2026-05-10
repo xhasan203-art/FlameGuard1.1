@@ -634,6 +634,106 @@
     .quote-form { padding: 1.8rem; }
   }
 
+  /* ── FOUNDERS ── */
+  .founders { background: var(--dark); }
+
+  .founders-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+    margin-top: 3rem;
+    max-width: 900px;
+  }
+
+  .founder-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 2rem 1.5rem 1.8rem;
+    text-align: center;
+    transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+    position: relative; overflow: hidden;
+  }
+
+  .founder-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, transparent, var(--flame), transparent);
+    opacity: 0; transition: opacity 0.3s;
+  }
+
+  .founder-card:hover {
+    border-color: rgba(255,77,0,0.35);
+    transform: translateY(-6px);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+  }
+
+  .founder-card:hover::before { opacity: 1; }
+
+  .founder-img-wrap {
+    position: relative;
+    width: 130px; height: 130px;
+    margin: 0 auto 1.2rem;
+  }
+
+  .founder-img {
+    width: 130px; height: 130px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center top;
+    border: 3px solid rgba(255,77,0,0.4);
+    display: block;
+    position: relative; z-index: 1;
+  }
+
+  .founder-avatar-wrap {
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  .founder-avatar {
+    width: 130px; height: 130px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgba(255,77,0,0.25), rgba(255,140,66,0.1));
+    border: 3px solid rgba(255,77,0,0.4);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Syne', sans-serif;
+    font-size: 2.2rem; font-weight: 800;
+    color: var(--flame);
+    position: relative; z-index: 1;
+  }
+
+  .founder-glow {
+    position: absolute;
+    inset: -8px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,77,0,0.15), transparent 70%);
+    z-index: 0;
+    opacity: 0; transition: opacity 0.3s;
+  }
+
+  .founder-card:hover .founder-glow { opacity: 1; }
+
+  .founder-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.05rem; font-weight: 800;
+    color: var(--white); margin-bottom: 0.3rem;
+  }
+
+  .founder-role {
+    font-size: 0.8rem; color: var(--muted);
+    margin-bottom: 0.8rem; line-height: 1.4;
+  }
+
+  .founder-id {
+    display: inline-block;
+    font-size: 0.72rem; font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--flame);
+    background: rgba(255,77,0,0.1);
+    border: 1px solid rgba(255,77,0,0.25);
+    border-radius: 100px;
+    padding: 0.25rem 0.8rem;
+  }
+
   /* Scroll reveal */
   .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
   .reveal.visible { opacity: 1; transform: translateY(0); }
@@ -702,6 +802,7 @@
     <li><a href="#package">Our System</a></li>
     <li><a href="#how">How It Works</a></li>
     <li><a href="#monitor">Live Monitor</a></li>
+    <li><a href="#founders">The Team</a></li>
     <li><a href="#quote" class="nav-cta">Get a Quote</a></li>
   </ul>
   <div class="hamburger" onclick="toggleMenu()">
@@ -715,6 +816,7 @@
   <a href="#package" onclick="toggleMenu()">Our System</a>
   <a href="#how" onclick="toggleMenu()">How It Works</a>
   <a href="#monitor" onclick="toggleMenu()">Live Monitor</a>
+  <a href="#founders" onclick="toggleMenu()">The Team</a>
   <a href="#quote" onclick="toggleMenu()" style="color:var(--flame);font-weight:700;">Get a Quote →</a>
 </div>
 
@@ -1133,6 +1235,47 @@
     </div>
 
 
+<!-- FOUNDERS -->
+<section class="founders" id="founders">
+  <p class="section-label reveal">The Team</p>
+  <h2 class="section-title reveal">Meet the Founders</h2>
+  <p class="section-sub reveal">The minds behind FlameGuard — engineering students from Bahrain committed to making kitchens safer.</p>
+
+  <div class="founders-grid">
+
+    <div class="founder-card reveal">
+      <div class="founder-img-wrap">
+        <img src="hasan_pic.jpg" alt="Hasan Hasan" class="founder-img"/>
+        <div class="founder-glow"></div>
+      </div>
+      <h3 class="founder-name">Hasan Hasan</h3>
+      <p class="founder-role">Co-Founder & Systems Engineer</p>
+      <span class="founder-id">202306939</span>
+    </div>
+
+    <div class="founder-card reveal">
+      <div class="founder-img-wrap">
+        <img src="Sharifa_pic.jpg" alt="Sharifa Juma" class="founder-img"/>
+        <div class="founder-glow"></div>
+      </div>
+      <h3 class="founder-name">Sharifa Juma</h3>
+      <p class="founder-role">Co-Founder & Project Lead</p>
+      <span class="founder-id">202306933</span>
+    </div>
+
+    <div class="founder-card reveal">
+      <div class="founder-img-wrap founder-avatar-wrap">
+        <div class="founder-avatar">AM</div>
+        <div class="founder-glow"></div>
+      </div>
+      <h3 class="founder-name">Abdulla Mohd</h3>
+      <p class="founder-role">Co-Founder & Hardware Lead</p>
+      <span class="founder-id">202306963</span>
+    </div>
+
+  </div>
+</section>
+
 <!-- QUOTE -->
 <section class="quote" id="quote">
   <p class="section-label reveal">Get a Quote</p>
@@ -1155,11 +1298,11 @@
       <div class="form-grid">
         <div class="form-group">
           <label>First Name *</label>
-          <input type="text" id="fname" placeholder="Ahmed">
+          <input type="text" id="fname" placeholder="Hasan">
         </div>
         <div class="form-group">
           <label>Last Name *</label>
-          <input type="text" id="lname" placeholder="Al-Rashid">
+          <input type="text" id="lname" placeholder="Hasan">
         </div>
         <div class="form-group">
           <label>Email Address *</label>
@@ -1258,6 +1401,7 @@
     <a href="#package">System</a>
     <a href="#how">How It Works</a>
     <a href="#monitor">Live Monitor</a>
+    <a href="#founders">The Team</a>
     <a href="#quote">Get a Quote</a>
   </div>
   <p class="footer-copy">© 2025 FlameGuard. All rights reserved.</p>
