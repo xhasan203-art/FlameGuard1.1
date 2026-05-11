@@ -839,7 +839,7 @@
 
   <div class="hero-stats">
     <div class="stat">
-      <span class="stat-val">&lt; 0.5s</span>
+      <span class="stat-val">&lt; 10ms</span>
       <span class="stat-label">Gas detection response</span>
     </div>
     <div class="stat">
@@ -987,7 +987,7 @@
       <h3>PLC Controller</h3>
       <p>The central automation hub. Continuously processes inputs from all sensors and triggers outputs — valve closure, alarm, suppression — within milliseconds.</p>
       <div class="product-specs">
-        <span class="spec">Sub-500ms response time</span>
+        <span class="spec">Sub-10ms response time</span>
         <span class="spec">Multi-zone support</span>
         <span class="spec">Fail-safe logic built-in</span>
         <span class="spec">Alarm relay outputs</span>
@@ -1134,7 +1134,7 @@
     <div class="how-card reveal">
       <div class="how-num">02</div>
       <h3>PLC Processing</h3>
-      <p>The Programmable Logic Controller receives the signal and evaluates the threat level, triggering the appropriate response protocol in under 500ms.</p>
+      <p>The Programmable Logic Controller receives the signal and evaluates the threat level, triggering the appropriate response protocol in under 10ms.</p>
     </div>
     <div class="how-card reveal">
       <div class="how-num">03</div>
@@ -1178,11 +1178,11 @@
         <span class="sc-sub">0 ppm</span>
       </button>
       <button class="mon-btn" id="mbtn-high" onclick="monSetScenario('high')">
-        <span class="sc-label">High Gas</span>
+        <span class="sc-label">Gas High</span>
         <span class="sc-sub">2,100 ppm</span>
       </button>
       <button class="mon-btn" id="mbtn-danger" onclick="monSetScenario('danger')">
-        <span class="sc-label">Danger</span>
+        <span class="sc-label">Gas High-High</span>
         <span class="sc-sub">5,250 ppm</span>
       </button>
     </div>
@@ -1206,7 +1206,12 @@
         <div class="mon-bar-track">
           <div class="mon-bar-fill" id="mon-bar" style="width:0%;background:var(--green);"></div>
         </div>
-        <div class="mon-bar-labels"><span>0</span><span>2,100</span><span>5,250</span><span>10,500</span></div>
+        <div class="mon-bar-labels" style="position:relative;height:14px;">
+  <span style="position:absolute;left:0%;">0</span>
+  <span style="position:absolute;left:20%;transform:translateX(-50%);">2,100</span>
+  <span style="position:absolute;left:50%;transform:translateX(-50%);">5,250</span>
+  <span style="position:absolute;right:0;">10,500</span>
+</div>
       </div>
     </div>
 
@@ -1506,21 +1511,21 @@
     },
     high: {
       ppm: 2100, barPct: 20, barColor: '#F5A623',
-      alert: { cls: 'warn', icon: '⚠', text: 'High gas detected — Valve In closed, ventilation running' },
-      gas:  { cls: 'warn', text: 'High — 2100 ppm', card: 'comp-warn' },
+      alert: { cls: 'warn', icon: '⚠', text: 'Gas High — Valve In closed, ventilation running' },
+      gas:  { cls: 'warn', text: 'Gas High — 2100 ppm', card: 'comp-warn' },
       vin:  { cls: 'danger', text: 'CLOSED',         card: 'comp-danger', icon: '🔴' },
       vent: { cls: 'warn',   text: 'Running',        card: 'comp-warn' },
       vout: { cls: 'ok',     text: 'Open',           card: '', icon: '🔧' },
-      diag: { status: 'Gas concentration: 2,100 ppm — High alarm ON, Valve 1 & 2 closed' }
+      diag: { status: 'Gas concentration: 2,100 ppm — Gas High alarm: Valve 1 & 2 closed' }
     },
     danger: {
       ppm: 5250, barPct: 50, barColor: '#FF4D00',
-      alert: { cls: 'danger', icon: '🚨', text: 'DANGER — Critical level. Both valves CLOSED. Ventilation running. Fire suppression armed.' },
-      gas:  { cls: 'danger', text: 'Critical — 5250 ppm', card: 'comp-danger' },
+      alert: { cls: 'danger', icon: '🚨', text: 'Gas High-High — Critical level. Both valves CLOSED. Ventilation running. Fire suppression armed.' },
+      gas:  { cls: 'danger', text: 'Gas High-High — 5250 ppm', card: 'comp-danger' },
       vin:  { cls: 'danger', text: 'CLOSED',               card: 'comp-danger', icon: '🔴' },
       vent: { cls: 'warn',   text: 'Running',              card: 'comp-warn' },
       vout: { cls: 'danger', text: 'CLOSED',               card: 'comp-danger', icon: '🔴' },
-      diag: { status: 'Gas concentration: 5,250 ppm — DANGER: Fire suppression ON, all valves closed' }
+      diag: { status: 'Gas concentration: 5,250 ppm — Gas High-High: Fire suppression ON, all valves closed' }
     }
   };
 
